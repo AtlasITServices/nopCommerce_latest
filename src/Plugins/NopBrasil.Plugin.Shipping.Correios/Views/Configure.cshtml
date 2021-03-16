@@ -1,0 +1,232 @@
+﻿@model NopBrasil.Plugin.Shipping.Correios.Models.CorreiosShippingModel
+
+@{
+    Layout = "_ConfigurePlugin";
+}
+
+<div style="color:Red;">
+    @Html.ValidationSummary(false)
+</div>
+
+<form asp-controller="ShippingCorreios" asp-action="Configure" method="post">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div>
+                    <a href="http://www.nopcommercebrasil.com"><img src="/Plugins/Shipping.Correios/Content/Images/nopCommerceBrasil.png"></a>
+                    <br />
+                    <p>
+                        Este plugin foi desenvolvido por <a href="http://www.nopcommercebrasil.com">NopCommerce Brasil - http://www.nopcommercebrasil.com</a><br />
+                        Em caso de dúvidas ou problemas por favor entre em contato conosco através do email <a href="mailto:nopcommercebrasil@nopcommercebrasil.com" target="_top">nopcommercebrasil@nopcommercebrasil.com</a><br />
+                        Este plugin é open-source e seu código-fonte está disponível no <a href="https://github.com/nopCommerceBrasil">GitHub do NopCommerce Brasil</a> no repositório <a href="https://github.com/nopCommerceBrasil/NopBrasil.Plugin.Shipping.Correios">NopBrasil.Plugin.Shipping.Correios</a>
+                    </p>
+                    <br />
+
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="Url" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="Url" />
+                        <span asp-validation-for="Url"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="CompanyCode" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="CompanyCode" />
+                        <span asp-validation-for="CompanyCode"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="Password" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="Password" />
+                        <span asp-validation-for="Password"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="PostalCodeFrom" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="PostalCodeFrom" />
+                        <span asp-validation-for="PostalCodeFrom"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="AddDaysForDelivery" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="AddDaysForDelivery" />
+                        <span asp-validation-for="AddDaysForDelivery"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="AvailableCarrierServices" />
+                    </div>
+                    <div class="col-md-9">
+                        <div style="height: 250px; width: 300px; overflow: auto; border: solid 1px #bbb;">
+                            @foreach (var csd in Model.AvailableCarrierServices)
+                            {
+                                <input type="checkbox" name="CheckedCarrierServices" value="@(csd)" checked="@Model.ServicesOffered.Contains(csd)" />
+                                <label>@csd</label>
+                                <br />
+                            }
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="ServiceNameDefault" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="ServiceNameDefault" />
+                        <span asp-validation-for="ServiceNameDefault"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="ShippingRateDefault" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="ShippingRateDefault" />
+                        <span asp-validation-for="ShippingRateDefault"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="QtdDaysForDeliveryDefault" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="QtdDaysForDeliveryDefault" />
+                        <span asp-validation-for="QtdDaysForDeliveryDefault"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="PercentageShippingFee" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="PercentageShippingFee" />
+                        <span asp-validation-for="PercentageShippingFee"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="DeclaredMinimumValue" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="DeclaredMinimumValue" />
+                        <span asp-validation-for="DeclaredMinimumValue"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="MinimumLength" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="MinimumLength" />
+                        <span asp-validation-for="MinimumLength"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="MinimumHeight" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="MinimumHeight" />
+                        <span asp-validation-for="MinimumHeight"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="MinimumWidth" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="MinimumWidth" />
+                        <span asp-validation-for="MinimumWidth"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="MaximumLength" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="MaximumLength" />
+                        <span asp-validation-for="MaximumLength"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="MaximumHeight" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="MaximumHeight" />
+                        <span asp-validation-for="MaximumHeight"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="MaximumWidth" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="MaximumWidth" />
+                        <span asp-validation-for="MaximumWidth"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="MinimumWeight" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="MinimumWeight" />
+                        <span asp-validation-for="MinimumWeight"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="MaximumWeight" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="MaximumWeight" />
+                        <span asp-validation-for="MaximumWeight"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-9 col-md-offset-3">
+                        <input type="submit" name="save" class="btn bg-blue" value="@T("Admin.Common.Save")" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
